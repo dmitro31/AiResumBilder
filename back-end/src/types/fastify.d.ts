@@ -13,10 +13,12 @@ declare module "@fastify/jwt" {
   }
 }
 
+
 declare module "fastify" {
   interface FastifyInstance {
-    jwt: { sign: (payload: object, options: object) => string; verify: <T>(token: string) => T };
-    refreshJwt: { sign: (payload: object, options: object) => string; verify: <T>(token: string) => T };
-    redis: any;
+    refresh: {
+      sign: typeof import("@fastify/jwt").FastifyJWT["sign"]
+      verify: typeof import("@fastify/jwt").FastifyJWT["verify"]
+    }
   }
 }

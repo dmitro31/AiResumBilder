@@ -1,77 +1,97 @@
-import { prisma } from "../../prisma"
-import { hashPassword, comparePassword } from "../../utils/hash"
-import { FastifyInstance } from "fastify"
+import { prisma } from "../../prisma";
+import { hashPassword, comparePassword } from "../../utils/hash";
+import { FastifyInstance } from "fastify";
 
-
-export const registerUser = async (email: string, password: string , name: string) => {
-  const existing = await prisma.user.findUnique({ where: { email } })
-  if (existing) throw new Error("User exists")
-
-  const hashed = await hashPassword(password)
-
-  return prisma.user.create({
-    data: { email, password: hashed , name }
-  })
-}
-
-export const loginUser = async (
+export const registerUser = async (
   app: FastifyInstance,
   email: string,
   password: string,
+  name: string
 ) => {
-  const user = await prisma.user.findUnique({ where: { email } })
-  if (!user) throw new Error("Invalid credentials")
+  const existing = await prisma.user.findUnique({ where: { email } });
+  if (existing) throw new Error("Користувач з таким email вже існує");
 
-  const valid = await comparePassword(password, user.password!)
-  if (!valid) throw new Error("Invalid credentials")
+  const hashed = await hashPassword(password);
 
-const accessToken = app.jwt.sign(
-  {
-    userId: user.id,
-    role: "user"
-  },
-  { expiresIn: "15m" }
-)
+  const user = await prisma.user.create({
+    data: { email, password: hashed, name },
+  });
 
-  const refreshToken = app.refreshJwt.sign(
-  { userId: user.id },
-  { expiresIn: "7d" }
-)
+  const accessToken = app.jwt.sign(
+    { userId: user.id, role: "user" },
+    { expiresIn: "15m" }
+  );
 
-  
+  const refreshToken = app.refresh.sign(
+    { userId: user.id },
+    { expiresIn: "7d" }
+  );
 
   await app.redis.set(
     `refresh:${user.id}`,
     refreshToken,
     "EX",
     60 * 60 * 24 * 7
-  )
+  );
 
-  return { accessToken, refreshToken }
-}
+  return {
+    accessToken,
+    refreshToken,
+    user: { id: user.id, email: user.email, name: user.name },
+  };
+};
 
-export const refreshTokens = async (
+export const loginUser = async (
   app: FastifyInstance,
-  token: string
+  email: string,
+  password: string
 ) => {
-const payload = app.refreshJwt.verify<{ userId: string }>(token)
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user) throw new Error("Невірний email або пароль");
 
-  const saved = await app.redis.get(`refresh:${payload.userId}`)
+  const valid = await comparePassword(password, user.password!);
+  if (!valid) throw new Error("Невірний email або пароль");
+
+  const accessToken = app.jwt.sign(
+    { userId: user.id, role: "user" },
+    { expiresIn: "15m" }
+  );
+
+  const refreshToken = app.refresh.sign(
+    { userId: user.id },
+    { expiresIn: "7d" }
+  );
+
+  await app.redis.set(
+    `refresh:${user.id}`,
+    refreshToken,
+    "EX",
+    60 * 60 * 24 * 7
+  );
+
+  return {
+    accessToken,
+    refreshToken,
+    user: { id: user.id, email: user.email, name: user.name },
+  };
+};
+
+export const refreshTokens = async (app: FastifyInstance, token: string) => {
+  const payload = app.refresh.verify<{ userId: string }>(token);
+
+  const saved = await app.redis.get(`refresh:${payload.userId}`);
   if (!saved || saved !== token) {
-    throw new Error("Invalid refresh token")
+    throw new Error("Сесія застаріла, увійдіть знову");
   }
 
   const accessToken = app.jwt.sign(
-    { userId: payload.userId },
+    { userId: payload.userId, role: "user" },
     { expiresIn: "15m" }
-  )
+  );
 
-  return { accessToken }
-}
+  return { accessToken };
+};
 
-export const logoutUser = async (
-  app: FastifyInstance,
-  userId: string
-) => {
-  await app.redis.del(`refresh:${userId}`)
-}
+export const logoutUser = async (app: FastifyInstance, userId: string) => {
+  await app.redis.del(`refresh:${userId}`);
+};
