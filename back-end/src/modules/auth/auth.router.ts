@@ -4,23 +4,28 @@ import { authHook } from "../../hooks/auth.hook";
 import { roleHook } from "../../hooks/rool.hook";
 
 export default async (app: FastifyInstance) => {
-    app.post("/register" , controller.register)
-    app.post("/login" , controller.login)
-    app.post("/refresh" , controller.refresh)
+    app.post("/register", controller.register)
+    app.post("/login", controller.login)
+    app.post("/refresh", controller.refresh)
 
-    app.post("/logout" , {
+    app.post("/logout", {
         preHandler: [authHook]
-    } , controller.logout)
+    }, controller.logout)
 
-    app.get("/me" , {
+    app.get("/me", {
         preHandler: [authHook]
-    } , async (req) => {
-        return req.user
+    }, async (req) => {
+        return {
+            id: req.user.id,
+            name: req.user.name,
+            email: req.user.email,
+            role: req.user.role
+        }
     })
 
-    app.get("/admin" , {
-        preHandler: [authHook , roleHook(["admin"])]
-    } , async () => {
-        return { message: "admin only"}
+    app.get("/admin", {
+        preHandler: [authHook, roleHook(["admin"])]
+    }, async () => {
+        return { message: "admin only" }
     })
 }
