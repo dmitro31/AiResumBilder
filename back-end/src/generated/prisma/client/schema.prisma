@@ -14,3 +14,15 @@ model User {
   password  String
   createdAt DateTime @default(now())
 }
+
+model Resume {
+  id         String   @id @default(uuid())
+  name       String
+  position   String
+  about      String
+  skills     Json
+  experience Json
+  template   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
