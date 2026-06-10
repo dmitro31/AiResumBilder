@@ -1,5 +1,4 @@
 'use client'
-
 import { useResumeStore } from "@/store/useResumeStore"
 import {
   MinimalResult,
@@ -12,7 +11,6 @@ import {
   CorporateResult,
   NeoBrutalismResult
 } from "@/features/templates/Result"
-
 export default function Result() {
   const template = useResumeStore((s) => s.template)
   const isPro = useResumeStore((s) => s.isPro)
