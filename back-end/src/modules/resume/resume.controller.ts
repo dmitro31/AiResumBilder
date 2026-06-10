@@ -86,7 +86,7 @@ export const update = async (
         skills: string[]
         experience: string[]
         template: string
-        isPro: string
+        isPro: boolean
     }
 
     const resume = await prisma.resume.findFirst({

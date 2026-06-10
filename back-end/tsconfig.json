@@ -4,6 +4,7 @@
     "target": "esnext",
     "types": ["node"],
     "sourceMap": true,
+    "outDir": "./dist",
     "declaration": true,
     "declarationMap": true,
     "noUncheckedIndexedAccess": true,

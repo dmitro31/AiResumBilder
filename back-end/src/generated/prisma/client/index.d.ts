@@ -2077,8 +2077,8 @@ export namespace Prisma {
     name: string | null
     position: string | null
     about: string | null
-    contact: string | null
     template: string | null
+    isPro: boolean | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2089,8 +2089,8 @@ export namespace Prisma {
     name: string | null
     position: string | null
     about: string | null
-    contact: string | null
     template: string | null
+    isPro: boolean | null
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2105,6 +2105,7 @@ export namespace Prisma {
     skills: number
     experience: number
     template: number
+    isPro: number
     userId: number
     createdAt: number
     updatedAt: number
@@ -2117,8 +2118,8 @@ export namespace Prisma {
     name?: true
     position?: true
     about?: true
-    contact?: true
     template?: true
+    isPro?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -2129,8 +2130,8 @@ export namespace Prisma {
     name?: true
     position?: true
     about?: true
-    contact?: true
     template?: true
+    isPro?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -2145,6 +2146,7 @@ export namespace Prisma {
     skills?: true
     experience?: true
     template?: true
+    isPro?: true
     userId?: true
     createdAt?: true
     updatedAt?: true
@@ -2228,10 +2230,11 @@ export namespace Prisma {
     name: string
     position: string
     about: string
-    contact: string
+    contact: JsonValue
     skills: JsonValue
     experience: JsonValue
     template: string
+    isPro: boolean
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -2263,6 +2266,7 @@ export namespace Prisma {
     skills?: boolean
     experience?: boolean
     template?: boolean
+    isPro?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2278,6 +2282,7 @@ export namespace Prisma {
     skills?: boolean
     experience?: boolean
     template?: boolean
+    isPro?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2293,6 +2298,7 @@ export namespace Prisma {
     skills?: boolean
     experience?: boolean
     template?: boolean
+    isPro?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2308,12 +2314,13 @@ export namespace Prisma {
     skills?: boolean
     experience?: boolean
     template?: boolean
+    isPro?: boolean
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "position" | "about" | "contact" | "skills" | "experience" | "template" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["resume"]>
+  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "position" | "about" | "contact" | "skills" | "experience" | "template" | "isPro" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["resume"]>
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2334,10 +2341,11 @@ export namespace Prisma {
       name: string
       position: string
       about: string
-      contact: string
+      contact: Prisma.JsonValue
       skills: Prisma.JsonValue
       experience: Prisma.JsonValue
       template: string
+      isPro: boolean
       userId: string
       createdAt: Date
       updatedAt: Date
@@ -2769,10 +2777,11 @@ export namespace Prisma {
     readonly name: FieldRef<"Resume", 'String'>
     readonly position: FieldRef<"Resume", 'String'>
     readonly about: FieldRef<"Resume", 'String'>
-    readonly contact: FieldRef<"Resume", 'String'>
+    readonly contact: FieldRef<"Resume", 'Json'>
     readonly skills: FieldRef<"Resume", 'Json'>
     readonly experience: FieldRef<"Resume", 'Json'>
     readonly template: FieldRef<"Resume", 'String'>
+    readonly isPro: FieldRef<"Resume", 'Boolean'>
     readonly userId: FieldRef<"Resume", 'String'>
     readonly createdAt: FieldRef<"Resume", 'DateTime'>
     readonly updatedAt: FieldRef<"Resume", 'DateTime'>
@@ -3229,6 +3238,7 @@ export namespace Prisma {
     skills: 'skills',
     experience: 'experience',
     template: 'template',
+    isPro: 'isPro',
     userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -3317,6 +3327,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -3396,10 +3413,11 @@ export namespace Prisma {
     name?: StringFilter<"Resume"> | string
     position?: StringFilter<"Resume"> | string
     about?: StringFilter<"Resume"> | string
-    contact?: StringFilter<"Resume"> | string
+    contact?: JsonFilter<"Resume">
     skills?: JsonFilter<"Resume">
     experience?: JsonFilter<"Resume">
     template?: StringFilter<"Resume"> | string
+    isPro?: BoolFilter<"Resume"> | boolean
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
@@ -3415,6 +3433,7 @@ export namespace Prisma {
     skills?: SortOrder
     experience?: SortOrder
     template?: SortOrder
+    isPro?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3429,10 +3448,11 @@ export namespace Prisma {
     name?: StringFilter<"Resume"> | string
     position?: StringFilter<"Resume"> | string
     about?: StringFilter<"Resume"> | string
-    contact?: StringFilter<"Resume"> | string
+    contact?: JsonFilter<"Resume">
     skills?: JsonFilter<"Resume">
     experience?: JsonFilter<"Resume">
     template?: StringFilter<"Resume"> | string
+    isPro?: BoolFilter<"Resume"> | boolean
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
@@ -3448,6 +3468,7 @@ export namespace Prisma {
     skills?: SortOrder
     experience?: SortOrder
     template?: SortOrder
+    isPro?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3464,10 +3485,11 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Resume"> | string
     position?: StringWithAggregatesFilter<"Resume"> | string
     about?: StringWithAggregatesFilter<"Resume"> | string
-    contact?: StringWithAggregatesFilter<"Resume"> | string
+    contact?: JsonWithAggregatesFilter<"Resume">
     skills?: JsonWithAggregatesFilter<"Resume">
     experience?: JsonWithAggregatesFilter<"Resume">
     template?: StringWithAggregatesFilter<"Resume"> | string
+    isPro?: BoolWithAggregatesFilter<"Resume"> | boolean
     userId?: StringWithAggregatesFilter<"Resume"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
@@ -3538,10 +3560,11 @@ export namespace Prisma {
     name: string
     position: string
     about: string
-    contact: string
+    contact: JsonNullValueInput | InputJsonValue
     skills: JsonNullValueInput | InputJsonValue
     experience: JsonNullValueInput | InputJsonValue
     template: string
+    isPro?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutResumesInput
@@ -3552,10 +3575,11 @@ export namespace Prisma {
     name: string
     position: string
     about: string
-    contact: string
+    contact: JsonNullValueInput | InputJsonValue
     skills: JsonNullValueInput | InputJsonValue
     experience: JsonNullValueInput | InputJsonValue
     template: string
+    isPro?: boolean
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3566,10 +3590,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
+    contact?: JsonNullValueInput | InputJsonValue
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
+    isPro?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutResumesNestedInput
@@ -3580,10 +3605,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
+    contact?: JsonNullValueInput | InputJsonValue
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
+    isPro?: BoolFieldUpdateOperationsInput | boolean
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3594,10 +3620,11 @@ export namespace Prisma {
     name: string
     position: string
     about: string
-    contact: string
+    contact: JsonNullValueInput | InputJsonValue
     skills: JsonNullValueInput | InputJsonValue
     experience: JsonNullValueInput | InputJsonValue
     template: string
+    isPro?: boolean
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -3608,10 +3635,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
+    contact?: JsonNullValueInput | InputJsonValue
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
+    isPro?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3621,10 +3649,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
+    contact?: JsonNullValueInput | InputJsonValue
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
+    isPro?: BoolFieldUpdateOperationsInput | boolean
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3745,6 +3774,11 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -3759,6 +3793,7 @@ export namespace Prisma {
     skills?: SortOrder
     experience?: SortOrder
     template?: SortOrder
+    isPro?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3769,8 +3804,8 @@ export namespace Prisma {
     name?: SortOrder
     position?: SortOrder
     about?: SortOrder
-    contact?: SortOrder
     template?: SortOrder
+    isPro?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3781,8 +3816,8 @@ export namespace Prisma {
     name?: SortOrder
     position?: SortOrder
     about?: SortOrder
-    contact?: SortOrder
     template?: SortOrder
+    isPro?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -3812,6 +3847,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedJsonFilter<$PrismaModel>
     _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ResumeCreateNestedManyWithoutUserInput = {
@@ -3868,6 +3911,10 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
     connectOrCreate?: UserCreateOrConnectWithoutResumesInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type UserUpdateOneRequiredWithoutResumesNestedInput = {
@@ -3944,6 +3991,11 @@ export namespace Prisma {
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
@@ -3968,15 +4020,24 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type ResumeCreateWithoutUserInput = {
     id?: string
     name: string
     position: string
     about: string
-    contact: string
+    contact: JsonNullValueInput | InputJsonValue
     skills: JsonNullValueInput | InputJsonValue
     experience: JsonNullValueInput | InputJsonValue
     template: string
+    isPro?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3986,10 +4047,11 @@ export namespace Prisma {
     name: string
     position: string
     about: string
-    contact: string
+    contact: JsonNullValueInput | InputJsonValue
     skills: JsonNullValueInput | InputJsonValue
     experience: JsonNullValueInput | InputJsonValue
     template: string
+    isPro?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -4028,10 +4090,11 @@ export namespace Prisma {
     name?: StringFilter<"Resume"> | string
     position?: StringFilter<"Resume"> | string
     about?: StringFilter<"Resume"> | string
-    contact?: StringFilter<"Resume"> | string
+    contact?: JsonFilter<"Resume">
     skills?: JsonFilter<"Resume">
     experience?: JsonFilter<"Resume">
     template?: StringFilter<"Resume"> | string
+    isPro?: BoolFilter<"Resume"> | boolean
     userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
@@ -4090,10 +4153,11 @@ export namespace Prisma {
     name: string
     position: string
     about: string
-    contact: string
+    contact: JsonNullValueInput | InputJsonValue
     skills: JsonNullValueInput | InputJsonValue
     experience: JsonNullValueInput | InputJsonValue
     template: string
+    isPro?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -4103,10 +4167,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
+    contact?: JsonNullValueInput | InputJsonValue
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
+    isPro?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4116,10 +4181,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
+    contact?: JsonNullValueInput | InputJsonValue
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
+    isPro?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4129,10 +4195,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
-    contact?: StringFieldUpdateOperationsInput | string
+    contact?: JsonNullValueInput | InputJsonValue
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
+    isPro?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

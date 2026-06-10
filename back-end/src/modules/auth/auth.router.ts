@@ -15,11 +15,12 @@ export default async (app: FastifyInstance) => {
     app.get("/me", {
         preHandler: [authHook]
     }, async (req) => {
+        const user = req.user as { userId: string; name: string; email: string; role?: string }
         return {
-            id: req.user.id,
-            name: req.user.name,
-            email: req.user.email,
-            role: req.user.role
+            id: user.userId,
+            name: user.name,
+            email: user.email,
+            role: user.role
         }
     })
 

@@ -18,14 +18,15 @@ model User {
 }
 
 model Resume {
-  id         String @id @default(uuid())
+  id         String  @id @default(uuid())
   name       String
   position   String
   about      String
-  contact    String
+  contact    Json
   skills     Json
   experience Json
   template   String
+  isPro      Boolean @default(false)
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
