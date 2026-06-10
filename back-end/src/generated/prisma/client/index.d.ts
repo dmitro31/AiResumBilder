@@ -952,6 +952,36 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    resumes: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resumes?: boolean | UserCountOutputTypeCountResumesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountResumesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ResumeWhereInput
+  }
+
 
   /**
    * Models
@@ -1121,6 +1151,8 @@ export namespace Prisma {
     email?: boolean
     password?: boolean
     createdAt?: boolean
+    resumes?: boolean | User$resumesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1148,10 +1180,18 @@ export namespace Prisma {
   }
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "createdAt", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resumes?: boolean | User$resumesArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
-    objects: {}
+    objects: {
+      resumes: Prisma.$ResumePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
@@ -1552,6 +1592,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    resumes<T extends User$resumesArgs<ExtArgs> = {}>(args?: Subset<T, User$resumesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResumePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1603,6 +1644,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1621,6 +1666,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1638,6 +1687,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -1687,6 +1740,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -1734,6 +1791,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which Users to fetch.
      */
@@ -1783,6 +1844,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The data needed to create a User.
      */
     data: XOR<UserCreateInput, UserUncheckedCreateInput>
@@ -1830,6 +1895,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to update a User.
      */
@@ -1897,6 +1966,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -1923,6 +1996,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput
@@ -1943,6 +2020,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.resumes
+   */
+  export type User$resumesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resume
+     */
+    select?: ResumeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Resume
+     */
+    omit?: ResumeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
+    where?: ResumeWhereInput
+    orderBy?: ResumeOrderByWithRelationInput | ResumeOrderByWithRelationInput[]
+    cursor?: ResumeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ResumeScalarFieldEnum | ResumeScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1954,6 +2055,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
   }
 
 
@@ -1972,7 +2077,9 @@ export namespace Prisma {
     name: string | null
     position: string | null
     about: string | null
+    contact: string | null
     template: string | null
+    userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1982,7 +2089,9 @@ export namespace Prisma {
     name: string | null
     position: string | null
     about: string | null
+    contact: string | null
     template: string | null
+    userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1992,9 +2101,11 @@ export namespace Prisma {
     name: number
     position: number
     about: number
+    contact: number
     skills: number
     experience: number
     template: number
+    userId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2006,7 +2117,9 @@ export namespace Prisma {
     name?: true
     position?: true
     about?: true
+    contact?: true
     template?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2016,7 +2129,9 @@ export namespace Prisma {
     name?: true
     position?: true
     about?: true
+    contact?: true
     template?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2026,9 +2141,11 @@ export namespace Prisma {
     name?: true
     position?: true
     about?: true
+    contact?: true
     skills?: true
     experience?: true
     template?: true
+    userId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2111,9 +2228,11 @@ export namespace Prisma {
     name: string
     position: string
     about: string
+    contact: string
     skills: JsonValue
     experience: JsonValue
     template: string
+    userId: string
     createdAt: Date
     updatedAt: Date
     _count: ResumeCountAggregateOutputType | null
@@ -2140,11 +2259,14 @@ export namespace Prisma {
     name?: boolean
     position?: boolean
     about?: boolean
+    contact?: boolean
     skills?: boolean
     experience?: boolean
     template?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
 
   export type ResumeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2152,11 +2274,14 @@ export namespace Prisma {
     name?: boolean
     position?: boolean
     about?: boolean
+    contact?: boolean
     skills?: boolean
     experience?: boolean
     template?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
 
   export type ResumeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2164,11 +2289,14 @@ export namespace Prisma {
     name?: boolean
     position?: boolean
     about?: boolean
+    contact?: boolean
     skills?: boolean
     experience?: boolean
     template?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
 
   export type ResumeSelectScalar = {
@@ -2176,26 +2304,41 @@ export namespace Prisma {
     name?: boolean
     position?: boolean
     about?: boolean
+    contact?: boolean
     skills?: boolean
     experience?: boolean
     template?: boolean
+    userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "position" | "about" | "skills" | "experience" | "template" | "createdAt" | "updatedAt", ExtArgs["result"]["resume"]>
+  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "position" | "about" | "contact" | "skills" | "experience" | "template" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["resume"]>
+  export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ResumeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ResumeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $ResumePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Resume"
-    objects: {}
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       position: string
       about: string
+      contact: string
       skills: Prisma.JsonValue
       experience: Prisma.JsonValue
       template: string
+      userId: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["resume"]>
@@ -2592,6 +2735,7 @@ export namespace Prisma {
    */
   export interface Prisma__ResumeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2625,9 +2769,11 @@ export namespace Prisma {
     readonly name: FieldRef<"Resume", 'String'>
     readonly position: FieldRef<"Resume", 'String'>
     readonly about: FieldRef<"Resume", 'String'>
+    readonly contact: FieldRef<"Resume", 'String'>
     readonly skills: FieldRef<"Resume", 'Json'>
     readonly experience: FieldRef<"Resume", 'Json'>
     readonly template: FieldRef<"Resume", 'String'>
+    readonly userId: FieldRef<"Resume", 'String'>
     readonly createdAt: FieldRef<"Resume", 'DateTime'>
     readonly updatedAt: FieldRef<"Resume", 'DateTime'>
   }
@@ -2647,6 +2793,10 @@ export namespace Prisma {
      */
     omit?: ResumeOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
+    /**
      * Filter, which Resume to fetch.
      */
     where: ResumeWhereUniqueInput
@@ -2665,6 +2815,10 @@ export namespace Prisma {
      */
     omit?: ResumeOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
+    /**
      * Filter, which Resume to fetch.
      */
     where: ResumeWhereUniqueInput
@@ -2682,6 +2836,10 @@ export namespace Prisma {
      * Omit specific fields from the Resume
      */
     omit?: ResumeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
     /**
      * Filter, which Resume to fetch.
      */
@@ -2731,6 +2889,10 @@ export namespace Prisma {
      */
     omit?: ResumeOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
+    /**
      * Filter, which Resume to fetch.
      */
     where?: ResumeWhereInput
@@ -2778,6 +2940,10 @@ export namespace Prisma {
      * Omit specific fields from the Resume
      */
     omit?: ResumeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
     /**
      * Filter, which Resumes to fetch.
      */
@@ -2827,6 +2993,10 @@ export namespace Prisma {
      */
     omit?: ResumeOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
+    /**
      * The data needed to create a Resume.
      */
     data: XOR<ResumeCreateInput, ResumeUncheckedCreateInput>
@@ -2860,6 +3030,10 @@ export namespace Prisma {
      */
     data: ResumeCreateManyInput | ResumeCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2874,6 +3048,10 @@ export namespace Prisma {
      * Omit specific fields from the Resume
      */
     omit?: ResumeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
     /**
      * The data needed to update a Resume.
      */
@@ -2926,6 +3104,10 @@ export namespace Prisma {
      * Limit how many Resumes to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2940,6 +3122,10 @@ export namespace Prisma {
      * Omit specific fields from the Resume
      */
     omit?: ResumeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
     /**
      * The filter to search for the Resume to update in case it exists.
      */
@@ -2966,6 +3152,10 @@ export namespace Prisma {
      * Omit specific fields from the Resume
      */
     omit?: ResumeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
     /**
      * Filter which Resume to delete.
      */
@@ -2998,6 +3188,10 @@ export namespace Prisma {
      * Omit specific fields from the Resume
      */
     omit?: ResumeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ResumeInclude<ExtArgs> | null
   }
 
 
@@ -3031,9 +3225,11 @@ export namespace Prisma {
     name: 'name',
     position: 'position',
     about: 'about',
+    contact: 'contact',
     skills: 'skills',
     experience: 'experience',
     template: 'template',
+    userId: 'userId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -3146,6 +3342,7 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
+    resumes?: ResumeListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -3154,6 +3351,7 @@ export namespace Prisma {
     email?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
+    resumes?: ResumeOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -3165,6 +3363,7 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
+    resumes?: ResumeListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -3197,11 +3396,14 @@ export namespace Prisma {
     name?: StringFilter<"Resume"> | string
     position?: StringFilter<"Resume"> | string
     about?: StringFilter<"Resume"> | string
+    contact?: StringFilter<"Resume"> | string
     skills?: JsonFilter<"Resume">
     experience?: JsonFilter<"Resume">
     template?: StringFilter<"Resume"> | string
+    userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ResumeOrderByWithRelationInput = {
@@ -3209,11 +3411,14 @@ export namespace Prisma {
     name?: SortOrder
     position?: SortOrder
     about?: SortOrder
+    contact?: SortOrder
     skills?: SortOrder
     experience?: SortOrder
     template?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type ResumeWhereUniqueInput = Prisma.AtLeast<{
@@ -3224,11 +3429,14 @@ export namespace Prisma {
     name?: StringFilter<"Resume"> | string
     position?: StringFilter<"Resume"> | string
     about?: StringFilter<"Resume"> | string
+    contact?: StringFilter<"Resume"> | string
     skills?: JsonFilter<"Resume">
     experience?: JsonFilter<"Resume">
     template?: StringFilter<"Resume"> | string
+    userId?: StringFilter<"Resume"> | string
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type ResumeOrderByWithAggregationInput = {
@@ -3236,9 +3444,11 @@ export namespace Prisma {
     name?: SortOrder
     position?: SortOrder
     about?: SortOrder
+    contact?: SortOrder
     skills?: SortOrder
     experience?: SortOrder
     template?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ResumeCountOrderByAggregateInput
@@ -3254,9 +3464,11 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Resume"> | string
     position?: StringWithAggregatesFilter<"Resume"> | string
     about?: StringWithAggregatesFilter<"Resume"> | string
+    contact?: StringWithAggregatesFilter<"Resume"> | string
     skills?: JsonWithAggregatesFilter<"Resume">
     experience?: JsonWithAggregatesFilter<"Resume">
     template?: StringWithAggregatesFilter<"Resume"> | string
+    userId?: StringWithAggregatesFilter<"Resume"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
   }
@@ -3267,6 +3479,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
+    resumes?: ResumeCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -3275,6 +3488,7 @@ export namespace Prisma {
     email: string
     password: string
     createdAt?: Date | string
+    resumes?: ResumeUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -3283,6 +3497,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resumes?: ResumeUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -3291,6 +3506,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resumes?: ResumeUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -3322,11 +3538,13 @@ export namespace Prisma {
     name: string
     position: string
     about: string
+    contact: string
     skills: JsonNullValueInput | InputJsonValue
     experience: JsonNullValueInput | InputJsonValue
     template: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutResumesInput
   }
 
   export type ResumeUncheckedCreateInput = {
@@ -3334,9 +3552,11 @@ export namespace Prisma {
     name: string
     position: string
     about: string
+    contact: string
     skills: JsonNullValueInput | InputJsonValue
     experience: JsonNullValueInput | InputJsonValue
     template: string
+    userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3346,11 +3566,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
+    contact?: StringFieldUpdateOperationsInput | string
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutResumesNestedInput
   }
 
   export type ResumeUncheckedUpdateInput = {
@@ -3358,9 +3580,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
+    contact?: StringFieldUpdateOperationsInput | string
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3370,9 +3594,11 @@ export namespace Prisma {
     name: string
     position: string
     about: string
+    contact: string
     skills: JsonNullValueInput | InputJsonValue
     experience: JsonNullValueInput | InputJsonValue
     template: string
+    userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3382,6 +3608,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
+    contact?: StringFieldUpdateOperationsInput | string
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
@@ -3394,9 +3621,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     position?: StringFieldUpdateOperationsInput | string
     about?: StringFieldUpdateOperationsInput | string
+    contact?: StringFieldUpdateOperationsInput | string
     skills?: JsonNullValueInput | InputJsonValue
     experience?: JsonNullValueInput | InputJsonValue
     template?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3425,6 +3654,16 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type ResumeListRelationFilter = {
+    every?: ResumeWhereInput
+    some?: ResumeWhereInput
+    none?: ResumeWhereInput
+  }
+
+  export type ResumeOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -3506,14 +3745,21 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
   export type ResumeCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     position?: SortOrder
     about?: SortOrder
+    contact?: SortOrder
     skills?: SortOrder
     experience?: SortOrder
     template?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3523,7 +3769,9 @@ export namespace Prisma {
     name?: SortOrder
     position?: SortOrder
     about?: SortOrder
+    contact?: SortOrder
     template?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3533,7 +3781,9 @@ export namespace Prisma {
     name?: SortOrder
     position?: SortOrder
     about?: SortOrder
+    contact?: SortOrder
     template?: SortOrder
+    userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3564,12 +3814,68 @@ export namespace Prisma {
     _max?: NestedJsonFilter<$PrismaModel>
   }
 
+  export type ResumeCreateNestedManyWithoutUserInput = {
+    create?: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput> | ResumeCreateWithoutUserInput[] | ResumeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ResumeCreateOrConnectWithoutUserInput | ResumeCreateOrConnectWithoutUserInput[]
+    createMany?: ResumeCreateManyUserInputEnvelope
+    connect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+  }
+
+  export type ResumeUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput> | ResumeCreateWithoutUserInput[] | ResumeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ResumeCreateOrConnectWithoutUserInput | ResumeCreateOrConnectWithoutUserInput[]
+    createMany?: ResumeCreateManyUserInputEnvelope
+    connect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type ResumeUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput> | ResumeCreateWithoutUserInput[] | ResumeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ResumeCreateOrConnectWithoutUserInput | ResumeCreateOrConnectWithoutUserInput[]
+    upsert?: ResumeUpsertWithWhereUniqueWithoutUserInput | ResumeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ResumeCreateManyUserInputEnvelope
+    set?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    disconnect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    delete?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    connect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    update?: ResumeUpdateWithWhereUniqueWithoutUserInput | ResumeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ResumeUpdateManyWithWhereWithoutUserInput | ResumeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
+  }
+
+  export type ResumeUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput> | ResumeCreateWithoutUserInput[] | ResumeUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ResumeCreateOrConnectWithoutUserInput | ResumeCreateOrConnectWithoutUserInput[]
+    upsert?: ResumeUpsertWithWhereUniqueWithoutUserInput | ResumeUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ResumeCreateManyUserInputEnvelope
+    set?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    disconnect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    delete?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    connect?: ResumeWhereUniqueInput | ResumeWhereUniqueInput[]
+    update?: ResumeUpdateWithWhereUniqueWithoutUserInput | ResumeUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ResumeUpdateManyWithWhereWithoutUserInput | ResumeUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutResumesInput = {
+    create?: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutResumesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutResumesNestedInput = {
+    create?: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutResumesInput
+    upsert?: UserUpsertWithoutResumesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutResumesInput, UserUpdateWithoutResumesInput>, UserUncheckedUpdateWithoutResumesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -3660,6 +3966,175 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type ResumeCreateWithoutUserInput = {
+    id?: string
+    name: string
+    position: string
+    about: string
+    contact: string
+    skills: JsonNullValueInput | InputJsonValue
+    experience: JsonNullValueInput | InputJsonValue
+    template: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ResumeUncheckedCreateWithoutUserInput = {
+    id?: string
+    name: string
+    position: string
+    about: string
+    contact: string
+    skills: JsonNullValueInput | InputJsonValue
+    experience: JsonNullValueInput | InputJsonValue
+    template: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ResumeCreateOrConnectWithoutUserInput = {
+    where: ResumeWhereUniqueInput
+    create: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput>
+  }
+
+  export type ResumeCreateManyUserInputEnvelope = {
+    data: ResumeCreateManyUserInput | ResumeCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ResumeUpsertWithWhereUniqueWithoutUserInput = {
+    where: ResumeWhereUniqueInput
+    update: XOR<ResumeUpdateWithoutUserInput, ResumeUncheckedUpdateWithoutUserInput>
+    create: XOR<ResumeCreateWithoutUserInput, ResumeUncheckedCreateWithoutUserInput>
+  }
+
+  export type ResumeUpdateWithWhereUniqueWithoutUserInput = {
+    where: ResumeWhereUniqueInput
+    data: XOR<ResumeUpdateWithoutUserInput, ResumeUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ResumeUpdateManyWithWhereWithoutUserInput = {
+    where: ResumeScalarWhereInput
+    data: XOR<ResumeUpdateManyMutationInput, ResumeUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ResumeScalarWhereInput = {
+    AND?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
+    OR?: ResumeScalarWhereInput[]
+    NOT?: ResumeScalarWhereInput | ResumeScalarWhereInput[]
+    id?: StringFilter<"Resume"> | string
+    name?: StringFilter<"Resume"> | string
+    position?: StringFilter<"Resume"> | string
+    about?: StringFilter<"Resume"> | string
+    contact?: StringFilter<"Resume"> | string
+    skills?: JsonFilter<"Resume">
+    experience?: JsonFilter<"Resume">
+    template?: StringFilter<"Resume"> | string
+    userId?: StringFilter<"Resume"> | string
+    createdAt?: DateTimeFilter<"Resume"> | Date | string
+    updatedAt?: DateTimeFilter<"Resume"> | Date | string
+  }
+
+  export type UserCreateWithoutResumesInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    createdAt?: Date | string
+  }
+
+  export type UserUncheckedCreateWithoutResumesInput = {
+    id?: string
+    name: string
+    email: string
+    password: string
+    createdAt?: Date | string
+  }
+
+  export type UserCreateOrConnectWithoutResumesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
+  }
+
+  export type UserUpsertWithoutResumesInput = {
+    update: XOR<UserUpdateWithoutResumesInput, UserUncheckedUpdateWithoutResumesInput>
+    create: XOR<UserCreateWithoutResumesInput, UserUncheckedCreateWithoutResumesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutResumesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutResumesInput, UserUncheckedUpdateWithoutResumesInput>
+  }
+
+  export type UserUpdateWithoutResumesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateWithoutResumesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResumeCreateManyUserInput = {
+    id?: string
+    name: string
+    position: string
+    about: string
+    contact: string
+    skills: JsonNullValueInput | InputJsonValue
+    experience: JsonNullValueInput | InputJsonValue
+    template: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ResumeUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    position?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    contact?: StringFieldUpdateOperationsInput | string
+    skills?: JsonNullValueInput | InputJsonValue
+    experience?: JsonNullValueInput | InputJsonValue
+    template?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResumeUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    position?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    contact?: StringFieldUpdateOperationsInput | string
+    skills?: JsonNullValueInput | InputJsonValue
+    experience?: JsonNullValueInput | InputJsonValue
+    template?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ResumeUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    position?: StringFieldUpdateOperationsInput | string
+    about?: StringFieldUpdateOperationsInput | string
+    contact?: StringFieldUpdateOperationsInput | string
+    skills?: JsonNullValueInput | InputJsonValue
+    experience?: JsonNullValueInput | InputJsonValue
+    template?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

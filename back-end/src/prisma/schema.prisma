@@ -13,15 +13,24 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+
+  resumes Resume[]
 }
+
 model Resume {
-  id         String   @id @default(uuid())
+  id         String @id @default(uuid())
   name       String
   position   String
   about      String
+  contact    Json
   skills     Json
   experience Json
   template   String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  isPro Boolean @default(false)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

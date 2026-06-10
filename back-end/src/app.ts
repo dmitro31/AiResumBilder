@@ -4,6 +4,7 @@ import jwt from "./plugins/jwt"
 import authRoutes from "./modules/auth/auth.router"
 import cors from "@fastify/cors"
 import { aiRoutes } from "./modules/ai/ai.router"
+import resumeRouter from "./modules/resume/resume.router"
 
 export const buildApp = async () => {
   const app = Fastify({ logger: true })
@@ -18,6 +19,10 @@ export const buildApp = async () => {
   await app.register(authRoutes, { prefix: "/auth" })
   app.register(aiRoutes)
 
+  app.register(resumeRouter , {
+    prefix: "/resume"
+  })
+
   await app.ready()
 
   console.log('JWT decorator:', !!app.jwt)
@@ -26,3 +31,4 @@ export const buildApp = async () => {
 
   return app
 }
+ 

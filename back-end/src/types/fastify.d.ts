@@ -1,3 +1,4 @@
+// src/types/fastify.d.ts
 import "@fastify/jwt"
 
 declare module "@fastify/jwt" {
@@ -7,14 +8,11 @@ declare module "@fastify/jwt" {
       role?: string
     }
     user: {
-      id: string
-      name: string
-      email: string
+      userId: string
       role?: string
     }
   }
 }
-
 
 declare module "fastify" {
   interface FastifyInstance {

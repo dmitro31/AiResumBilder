@@ -2,10 +2,19 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import * as service from "./auth.service";
 
 export const register = async (req: FastifyRequest, reply: FastifyReply) => {
-  const { email, password, name } = req.body as any;
-  const result = await service.registerUser(req.server, email, password, name);
-  return reply.send(result);
-};
+  console.log(req.body)
+
+  const { email, password, name } = req.body as any
+
+  const result = await service.registerUser(
+    req.server,
+    email,
+    password,
+    name
+  )
+
+  return reply.send(result)
+}
 
 export const login = async (req: FastifyRequest, reply: FastifyReply) => {
   const { email, password } = req.body as any;
