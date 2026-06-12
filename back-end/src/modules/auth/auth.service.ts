@@ -77,7 +77,7 @@ export const loginUser = async (
 };
 
 export const refreshTokens = async (app: FastifyInstance, token: string) => {
-  const payload = app.refresh.verify<{ userId: string }>(token);
+  const payload = app.refresh.verify(token) as { userId: string };
 
   const saved = await app.redis.get(`refresh:${payload.userId}`);
   if (!saved || saved !== token) {
