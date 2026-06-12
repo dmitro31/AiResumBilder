@@ -19,8 +19,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.6.0",
-    "tsx": "^4.21.0",
-    "typescript": "^6.0.3"
+    "tsx": "^4.21.0"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.95.2",
@@ -32,12 +31,12 @@
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "bcryptjs": "^3.0.3",
-    "crypto": "^1.0.1",
     "dotenv": "^17.4.2",
     "fastify": "^5.8.5",
     "groq-sdk": "^1.2.0",
     "jsonwebtoken": "^9.0.3",
     "openai": "^6.42.0",
-    "prisma": "^7.8.0"
+    "prisma": "^7.8.0",
+    "typescript": "^6.0.3"
   }
 }
