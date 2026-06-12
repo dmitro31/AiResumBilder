@@ -19,7 +19,6 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.6.0",
-    "prisma": "^7.8.0",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
   },
@@ -38,6 +37,7 @@
     "fastify": "^5.8.5",
     "groq-sdk": "^1.2.0",
     "jsonwebtoken": "^9.0.3",
-    "openai": "^6.42.0"
+    "openai": "^6.42.0",
+    "prisma": "^7.8.0"
   }
 }
