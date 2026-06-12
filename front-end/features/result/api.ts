@@ -1,6 +1,7 @@
+import { API_URL } from "@/config/api"
 
 export const getAllResumes = async () => {
-    const res = await fetch("http://localhost:4000/resume", {
+    const res = await fetch(`${API_URL}/resume`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: "include"

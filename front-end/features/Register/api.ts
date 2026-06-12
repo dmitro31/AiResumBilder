@@ -1,3 +1,5 @@
+import { API_URL } from "@/config/api"
+
 export const registerUser = async (
   name: string,
   email: string,
@@ -9,7 +11,7 @@ export const registerUser = async (
     password,
   })
 
-  const res = await fetch("http://localhost:4000/auth/register", {
+  const res = await fetch(`${API_URL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
