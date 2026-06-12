@@ -1,8 +1,11 @@
-import { prisma } from "../../prisma";
-export const create = async (req, reply) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.remove = exports.update = exports.getOne = exports.getAll = exports.create = void 0;
+const prisma_1 = require("../../prisma");
+const create = async (req, reply) => {
     const user = req.user;
     const body = req.body;
-    const resume = await prisma.resume.create({
+    const resume = await prisma_1.prisma.resume.create({
         data: {
             ...body,
             userId: user.userId
@@ -10,9 +13,10 @@ export const create = async (req, reply) => {
     });
     return reply.send(resume);
 };
-export const getAll = async (req, reply) => {
+exports.create = create;
+const getAll = async (req, reply) => {
     const user = req.user;
-    const resumes = await prisma.resume.findMany({
+    const resumes = await prisma_1.prisma.resume.findMany({
         where: {
             userId: user.userId
         },
@@ -22,10 +26,11 @@ export const getAll = async (req, reply) => {
     });
     return reply.send(resumes);
 };
-export const getOne = async (req, reply) => {
+exports.getAll = getAll;
+const getOne = async (req, reply) => {
     const user = req.user;
     const { id } = req.params;
-    const resume = await prisma.resume.findFirst({
+    const resume = await prisma_1.prisma.resume.findFirst({
         where: {
             id,
             userId: user.userId
@@ -38,11 +43,12 @@ export const getOne = async (req, reply) => {
     }
     return reply.send(resume);
 };
-export const update = async (req, reply) => {
+exports.getOne = getOne;
+const update = async (req, reply) => {
     const user = req.user;
     const { id } = req.params;
     const body = req.body;
-    const resume = await prisma.resume.findFirst({
+    const resume = await prisma_1.prisma.resume.findFirst({
         where: {
             id,
             userId: user.userId
@@ -53,16 +59,17 @@ export const update = async (req, reply) => {
             message: "Resume not found"
         });
     }
-    const updated = await prisma.resume.update({
+    const updated = await prisma_1.prisma.resume.update({
         where: { id },
         data: body
     });
     return reply.send(updated);
 };
-export const remove = async (req, reply) => {
+exports.update = update;
+const remove = async (req, reply) => {
     const user = req.user;
     const { id } = req.params;
-    const resume = await prisma.resume.findFirst({
+    const resume = await prisma_1.prisma.resume.findFirst({
         where: {
             id,
             userId: user.userId
@@ -73,11 +80,12 @@ export const remove = async (req, reply) => {
             message: "Resume not found"
         });
     }
-    await prisma.resume.delete({
+    await prisma_1.prisma.resume.delete({
         where: { id }
     });
     return reply.send({
         success: true
     });
 };
+exports.remove = remove;
 //# sourceMappingURL=resume.controller.js.map

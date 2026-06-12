@@ -1,11 +1,17 @@
-import OpenAI from "openai";
-import { prisma } from "../../prisma";
-import { optionalAuthHook } from "../../hooks/auth.hook";
-const openai = new OpenAI({
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.aiRoutes = aiRoutes;
+const openai_1 = __importDefault(require("openai"));
+const prisma_1 = require("../../prisma");
+const auth_hook_1 = require("../../hooks/auth.hook");
+const openai = new openai_1.default({
     apiKey: process.env.OPENROUTER_API_KEY,
     baseURL: "https://openrouter.ai/api/v1",
 });
-export async function aiRoutes(app) {
+async function aiRoutes(app) {
     app.options("/ai", async (request, reply) => {
         return reply.send();
     });
@@ -19,7 +25,7 @@ export async function aiRoutes(app) {
         return reply.send();
     });
     app.post("/ai", {
-        preHandler: [optionalAuthHook]
+        preHandler: [auth_hook_1.optionalAuthHook]
     }, async (request, reply) => {
         try {
             const user = request.user;
@@ -79,7 +85,7 @@ PRO режим: ${body.isPro}
                 .replace(/```/g, "")
                 .trim();
             const parsed = JSON.parse(cleaned);
-            const resume = await prisma.resume.create({
+            const resume = await prisma_1.prisma.resume.create({
                 data: {
                     name: body.formData.name,
                     position: body.formData.position,
@@ -103,11 +109,11 @@ PRO режим: ${body.isPro}
         }
     });
     app.get("/aiGet", {
-        preHandler: [optionalAuthHook]
+        preHandler: [auth_hook_1.optionalAuthHook]
     }, async (request, reply) => {
         try {
             const user = request.user;
-            const resumes = await prisma.resume.findMany({
+            const resumes = await prisma_1.prisma.resume.findMany({
                 where: { userId: user?.userId },
                 orderBy: {
                     createdAt: "desc"
@@ -124,12 +130,12 @@ PRO режим: ${body.isPro}
         }
     });
     app.get("/aiGet/:id", {
-        preHandler: [optionalAuthHook]
+        preHandler: [auth_hook_1.optionalAuthHook]
     }, async (request, reply) => {
         try {
             const user = request.user;
             const { id } = request.params;
-            const resume = await prisma.resume.findFirst({
+            const resume = await prisma_1.prisma.resume.findFirst({
                 where: { id, userId: user?.userId }
             });
             if (!resume) {
@@ -146,12 +152,12 @@ PRO режим: ${body.isPro}
         }
     });
     app.delete("/aiDelete/:id", {
-        preHandler: [optionalAuthHook]
+        preHandler: [auth_hook_1.optionalAuthHook]
     }, async (request, reply) => {
         try {
             const user = request.user;
             const { id } = request.params;
-            const resume = await prisma.resume.findFirst({
+            const resume = await prisma_1.prisma.resume.findFirst({
                 where: { id, userId: user?.userId }
             });
             if (!resume) {
@@ -159,7 +165,7 @@ PRO режим: ${body.isPro}
                     message: "Resume not found"
                 });
             }
-            await prisma.resume.delete({
+            await prisma_1.prisma.resume.delete({
                 where: {
                     id
                 }

@@ -1,8 +1,10 @@
-import "dotenv/config";
-import { buildApp } from "./app";
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
+const app_1 = require("./app");
 const start = async () => {
     try {
-        const app = await buildApp();
+        const app = await (0, app_1.buildApp)();
         await app.listen({ port: 4000, host: '0.0.0.0' });
         console.log("🚀 Server is running on http://localhost:4000");
     }

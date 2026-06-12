@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
-    "module": "Preserve",
-    "moduleResolution": "Bundler",
-    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "ignoreDeprecations": "6.0",
+    "target": "ES2020",
     "types": ["node"],
     "sourceMap": true,
     "rootDir": "./src",
@@ -10,10 +11,8 @@
     "declaration": true,
     "declarationMap": true,
     "strict": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
     "skipLibCheck": true,
-    "verbatimModuleSyntax": false
+    "esModuleInterop": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
