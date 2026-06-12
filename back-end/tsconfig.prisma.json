@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ESNext",
+    "types": ["node"],
+    "outDir": "./",
+    "rootDir": "./",
+    "skipLibCheck": true,
+    "esModuleInterop": true
+  },
+  "files": ["prisma.config.mts"]
+}

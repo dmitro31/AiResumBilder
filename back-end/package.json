@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "engines": {
     "node": "22.x"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/server.ts",
-    "build": "prisma generate && tsc",
+    "build": "tsc -p tsconfig.prisma.json && prisma generate && tsc",
     "start": "node dist/server.js"
   },
   "keywords": [],
@@ -18,7 +19,7 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^25.6.0",
+    "@types/node": "^25.9.3",
     "tsx": "^4.21.0"
   },
   "dependencies": {
