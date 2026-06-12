@@ -17,8 +17,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/jsonwebtoken": "^9.0.10",
     "tsx": "^4.21.0"
   },
   "dependencies": {
@@ -38,6 +36,8 @@
     "openai": "^6.42.0",
     "prisma": "^7.8.0",
     "@types/node": "^25.9.3",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "typescript": "^6.0.3"
   }
 }
