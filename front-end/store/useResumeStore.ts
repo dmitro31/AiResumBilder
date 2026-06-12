@@ -1,5 +1,6 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
+import { API_URL } from "@/config/api"
 
 type Experience = {
   position: string
@@ -124,7 +125,7 @@ export const useResumeStore =
                   accessToken: string
                 ) => {
                   return fetch(
-                    "http://localhost:4000/ai",
+                    `${API_URL}/4000/ai`,
                     {
                       method:
                         "POST",
@@ -175,7 +176,7 @@ export const useResumeStore =
 
                 const refreshResponse =
                   await fetch(
-                    "http://localhost:4000/auth/refresh",
+                    `${API_URL}4000/auth/refresh`,
                     {
                       method:
                         "POST",
