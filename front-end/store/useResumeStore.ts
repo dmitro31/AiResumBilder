@@ -125,7 +125,7 @@ export const useResumeStore =
                   accessToken: string
                 ) => {
                   return fetch(
-                    `${API_URL}/4000/ai`,
+                    `${API_URL}/ai`,
                     {
                       method:
                         "POST",
@@ -176,7 +176,7 @@ export const useResumeStore =
 
                 const refreshResponse =
                   await fetch(
-                    `${API_URL}4000/auth/refresh`,
+                    `${API_URL}/auth/refresh`,
                     {
                       method:
                         "POST",
