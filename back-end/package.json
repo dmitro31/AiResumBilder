@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch src/server.ts",
-    "build": "tsc -p tsconfig.prisma.json && prisma generate && tsc",
+    "build": "tsc -p tsconfig.prisma.json && prisma generate && tsc && prisma migrate deploy",
     "start": "node dist/server.js"
   },
   "keywords": [],
